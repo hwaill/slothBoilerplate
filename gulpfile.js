@@ -7,14 +7,19 @@ const sourcemaps = require('gulp-sourcemaps');
 function style() {
   return gulp.src('./assets/scss/**/*.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass({
+    /*.pipe(sass({
       outputStyle: 'compressed'
+    }))*/
+    .pipe(sass({
+      outputStyle: 'nested'
     }))
+    .pipe(autoprefixer({
+      cascade: false
+    }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./assets/css'))
     .pipe(browserSync.stream());
-  .pipe(autoprefixer({
-    cascade: false
-  }))
+
 }
 
 function watch() {
